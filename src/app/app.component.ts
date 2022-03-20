@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { UsersService } from './users.service';
-import {Data} from './app.model'
+
 
 @Component({
   selector: 'app-root',
@@ -10,8 +9,4 @@ import {Data} from './app.model'
 })
 export class AppComponent {
   title = 'commentSectionV2';
- 
-  
-  
-  
 }

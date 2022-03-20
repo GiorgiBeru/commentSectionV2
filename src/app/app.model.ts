@@ -16,7 +16,7 @@ export interface Reply {
   user: CurrentUser;
 }
 
-export interface Comment {
+export interface Commentari {
   id: number;
   content: string;
   createdAt: string;
@@ -27,5 +27,5 @@ export interface Comment {
 
 export interface Data {
   currentUser: CurrentUser;
-  comments: Comment[];
+  comments: Commentari[];
 }

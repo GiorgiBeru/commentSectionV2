@@ -1,11 +1,14 @@
 <section>
   <div class="card">
     <div class="title">
-      <img src="../../../assets/{{ commentItem.user.image.png }}" alt="User Avatar" />
-      <h1>{{ commentItem.user.username }}</h1>
-      <span>{{ commentItem.createdAt }}</span>
+      <img src="{{ replyItem.user.image.png }}" alt="User Avatar" />
+      <h1>{{ replyItem.user.username }}</h1>
+      <span>{{ replyItem.createdAt }}</span>
     </div>
-    <div *ngIf="commentItem.user.username === curUser.username" class="arricon">
+    <div
+      *ngIf="replyItem.user.username === replyCurUser.username"
+      class="arricon"
+    >
       <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg" id="icon1">
         <path
           d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z"
@@ -21,9 +24,10 @@
     </div>
 
     <div
-      *ngIf="commentItem.user.username !== curUser.username"
-      class="arricon"
+      *ngIf="replyItem.user.username !== replyCurUser.username"
       (click)="userReplies()"
+      class="arricon"
+      id="iconSeparate"
     >
       <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -33,12 +37,6 @@
       </svg>
     </div>
   </div>
-  <p>{{ commentItem.content }}</p>
+  <p>{{ replyItem.content }}</p>
 </section>
-
-<app-comment-reply
-  *ngFor="let reply of commentItem.replies"
-  [replyItem]="reply"
-  [replyCurUser]="curUser"
-></app-comment-reply>
 <app-user-reply *ngIf="userReply"></app-user-reply>

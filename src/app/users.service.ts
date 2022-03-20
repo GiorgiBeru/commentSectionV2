@@ -6,7 +6,7 @@ import { default as data } from '../data.json';
   providedIn: 'root',
 })
 export class UsersService {
-  getUsers(): Promise<any> {
+  getUsers(): Promise<Data> {
     return new Promise((resolve) => {
       return resolve(data);
     });

@@ -6,11 +6,16 @@ import { AppComponent } from './app.component';
 import { CommentComponent } from './comment/comment.component';
 import { CommentItemComponent } from './comment/comment-item/comment-item.component';
 
+import { CommentReplyComponent } from './comment/comment-item/comment-reply/comment-reply.component';
+import { UserReplyComponent } from './comment/comment-item/comment-reply/user-reply/user-reply.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     CommentComponent,
-    CommentItemComponent
+    CommentItemComponent,
+    CommentReplyComponent,
+    UserReplyComponent
   ],
   imports: [
     BrowserModule,

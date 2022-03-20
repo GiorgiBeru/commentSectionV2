@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {CurrentUser, Data} from '../app.model';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import {Commentari, CurrentUser, Data} from '../app.model';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -11,8 +12,8 @@ export class CommentComponent implements OnInit {
   ngOnInit(): void {
     this.loadUsers();
   }
-  currentUser: CurrentUser | undefined;
-  comments!: Comment[];
+  currentUser!: CurrentUser;
+  comments!: Commentari[];
   
   constructor(private usersService: UsersService) {}
   async loadUsers() {
@@ -20,4 +21,5 @@ export class CommentComponent implements OnInit {
     this.currentUser = data.currentUser;
     this.comments = data.comments;
   }
+
 }
