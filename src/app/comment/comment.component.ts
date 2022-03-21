@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Commentari, CurrentUser, Data, Reply } from '../app.model';
@@ -33,7 +34,7 @@ export class CommentComponent implements OnInit {
   async loadUsers() {
     const storageData = this.storageService.get<Data>(commentKey);
     if (storageData) {
-      var data: Data = storageData;
+      var data: Data | null = storageData;
       this.comments = data.comments;
       this.currentUser = data.currentUser;
       return;
@@ -48,13 +49,27 @@ export class CommentComponent implements OnInit {
     const toReply = this.comments.find((item) => item.id == data.id);
     const newComment: Reply = {
       content: data.content,
-      createdAt: new Date().getDate().toString(),
+      createdAt: 'just now',
       id: this.generateMaxId(),
       replyingTo: toReply?.user?.username ? toReply?.user?.username : '',
       score: 0,
       user: this.currentUser,
     };
     toReply?.replies.push(newComment);
+    this.refreshStorage();
+  }
+
+  n: number = 0;
+  HandleIdEmitted(id: number) {
+    console.log(this.comments);
+    this.comments.map((item: Commentari, index) => {
+      if (item.id === id) {
+        return (this.n = index);
+      } else {
+        return;
+      }
+    });
+    this.comments.splice(this.n, 1);
     this.refreshStorage();
   }
 

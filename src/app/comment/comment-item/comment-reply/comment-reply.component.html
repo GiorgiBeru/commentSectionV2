@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="!deleteCommentari">
   <div class="card">
     <div class="title">
       <img
@@ -6,14 +6,14 @@
         alt="User Avatar"
       />
       <h1>{{ replyItem.user?.username }}</h1>
+      <div  class="you" *ngIf="replyItem.user?.username === replyCurUser.username">You</div>
       <span>{{ replyItem.createdAt }}</span>
     </div>
-
     <div
       *ngIf="replyItem.user?.username === replyCurUser.username"
       class="arricon"
     >
-      <div id="icon1Div">
+      <div id="icon1Div" (click)="deleteComment(replyItem.id)">
         <svg
           width="12"
           height="14"
