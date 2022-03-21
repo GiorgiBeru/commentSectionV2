@@ -1,6 +1,15 @@
-<app-comment-item
-  (onMainReply)="HanldeMainReply($event)"
-  *ngFor="let comment of comments"
-  [commentItem]="comment"
-  [curUser]="currentUser"
-></app-comment-item>
+<section class="UpperPart">
+  <app-comment-item
+    (onMainReply)="HanldeMainReply($event)"
+    *ngFor="let comment of comments"
+    [commentItem]="comment"
+    [curUser]="currentUser"
+  ></app-comment-item>
+</section>
+
+<div class="userReplyComment">
+  <img src="../../assets/{{currentUser.image.png}}" alt="User avatar">
+  <textarea id="textarea" [(ngModel)]="mainreply"></textarea>
+  <button id="button" (click)="reply()">Reply</button>
+</div>
+
