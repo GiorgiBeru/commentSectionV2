@@ -1,12 +1,15 @@
 <section>
   <div class="card">
     <div class="title">
-      <img src="{{ replyItem.user.image.png }}" alt="User Avatar" />
-      <h1>{{ replyItem.user.username }}</h1>
+      <img
+        src="../../../../assets/{{ replyItem.user.image.png }}"
+        alt="User Avatar"
+      />
+      <h1>{{ replyItem.user?.username }}</h1>
       <span>{{ replyItem.createdAt }}</span>
     </div>
     <div
-      *ngIf="replyItem.user.username === replyCurUser.username"
+      *ngIf="replyItem.user?.username === replyCurUser.username"
       class="arricon"
     >
       <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg" id="icon1">
@@ -24,7 +27,7 @@
     </div>
 
     <div
-      *ngIf="replyItem.user.username !== replyCurUser.username"
+      *ngIf="replyItem.user?.username !== replyCurUser.username"
       (click)="userReplies()"
       class="arricon"
       id="iconSeparate"
@@ -39,4 +42,8 @@
   </div>
   <p>{{ replyItem.content }}</p>
 </section>
-<app-user-reply *ngIf="userReply"></app-user-reply>
+<app-user-reply
+  *ngIf="userReply"
+  (onReply)="handleContent($event)"
+  [replyItem]="replyCurUser"
+></app-user-reply>

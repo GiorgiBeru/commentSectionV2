@@ -8,6 +8,7 @@ import { CommentItemComponent } from './comment/comment-item/comment-item.compon
 
 import { CommentReplyComponent } from './comment/comment-item/comment-reply/comment-reply.component';
 import { UserReplyComponent } from './comment/comment-item/comment-reply/user-reply/user-reply.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,13 +16,10 @@ import { UserReplyComponent } from './comment/comment-item/comment-reply/user-re
     CommentComponent,
     CommentItemComponent,
     CommentReplyComponent,
-    UserReplyComponent
+    UserReplyComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

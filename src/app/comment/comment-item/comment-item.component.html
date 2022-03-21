@@ -1,7 +1,10 @@
 <section>
   <div class="card">
     <div class="title">
-      <img src="../../../assets/{{ commentItem.user.image.png }}" alt="User Avatar" />
+      <img
+        src="../../../assets/{{ commentItem.user.image.png }}"
+        alt="User Avatar"
+      />
       <h1>{{ commentItem.user.username }}</h1>
       <span>{{ commentItem.createdAt }}</span>
     </div>
@@ -37,8 +40,14 @@
 </section>
 
 <app-comment-reply
+  (bla)="handleMainReply($event)"
   *ngFor="let reply of commentItem.replies"
   [replyItem]="reply"
   [replyCurUser]="curUser"
 ></app-comment-reply>
-<app-user-reply *ngIf="userReply"></app-user-reply>
+
+<app-user-reply
+  (onReply)="handleMainReply($event)"
+  [replyItem]="curUser" 
+  *ngIf="userReply"
+></app-user-reply>
