@@ -14,7 +14,6 @@ const commentKey = 'comments';
 export class CommentComponent implements OnInit {
   ngOnInit(): void {
     this.loadUsers();
-    // if (!this.storageService.get(commentKey)) this.refreshStorage();
   }
   refreshStorage() {
     this.storageService.set<Data>(commentKey, {
@@ -58,7 +57,9 @@ export class CommentComponent implements OnInit {
     toReply?.replies.push(newComment);
     this.refreshStorage();
   }
-
+  HandleReplyToDelete(arr: Reply[]){
+    this.refreshStorage();
+  }
   n: number = 0;
   HandleIdEmitted(id: number) {
     console.log(this.comments);

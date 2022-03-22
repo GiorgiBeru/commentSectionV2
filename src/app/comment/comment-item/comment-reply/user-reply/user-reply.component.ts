@@ -10,7 +10,11 @@ export class UserReplyComponent implements OnInit {
   constructor() {}
   @Output() onReply: EventEmitter<string> = new EventEmitter<string>();
   @Input() replyItem!: CurrentUser;
-  ngOnInit(): void {}
+  @Input() replyTo!: string;
+  ngOnInit(): void {
+    
+  }
+
   content = '';
   reply() {
     if (this.content) {

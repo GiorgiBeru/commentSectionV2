@@ -11,6 +11,7 @@ export class CommentItemComponent implements OnInit {
   @Input() curUser!: CurrentUser;
   @Output() onMainReply: EventEmitter<any> = new EventEmitter<any>();
   @Output() idEmitted: EventEmitter<any> = new EventEmitter<any>();
+  @Output() replyToDelete: EventEmitter<any> = new EventEmitter<any>();
   userReply: Boolean = false;
   userReplies() {
     this.userReply = !this.userReply;
@@ -22,10 +23,21 @@ export class CommentItemComponent implements OnInit {
     this.userReplies();
   }
   deleteCommentari: boolean = false;
-  deleteComment(id: number){
+  deleteComment(id: number) {
     this.deleteCommentari = !this.deleteCommentari;
     this.idEmitted.emit(id);
   }
-  
+  n: number = 0;
+  handleIdEmittedGrandChild(id: number) {
+    this.commentItem.replies.map((reply: Reply, index) => {
+      if (reply.id === id) {
+        return (this.n = index);
+      } else {
+        return;
+      }
+    });
+    this.commentItem.replies.splice(this.n, 1);
+    this.replyToDelete.emit(this.commentItem.replies);
+  }
   ngOnInit(): void {}
 }

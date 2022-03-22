@@ -68,4 +68,5 @@
   *ngIf="userReply"
   (onReply)="handleContent($event)"
   [replyItem]="replyCurUser"
+  [replyTo]="replyItem.replyingTo"
 ></app-user-reply>

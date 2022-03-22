@@ -64,6 +64,7 @@
 
 <app-comment-reply
   (bla)="handleMainReply($event)"
+  (idEmittedGrandChild)="handleIdEmittedGrandChild($event)"
   *ngFor="let reply of commentItem.replies"
   [replyItem]="reply"
   [replyCurUser]="curUser"
