@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CurrentUser, Reply } from 'src/app/app.model';
+import { CurrentUser } from 'src/app/app.model';
 
 @Component({
   selector: 'app-user-reply',
@@ -10,10 +10,7 @@ export class UserReplyComponent implements OnInit {
   constructor() {}
   @Output() onReply: EventEmitter<string> = new EventEmitter<string>();
   @Input() replyItem!: CurrentUser;
-  @Input() replyTo!: string;
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   content = '';
   reply() {

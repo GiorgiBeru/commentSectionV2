@@ -64,9 +64,9 @@
   </div>
   <p>{{ replyItem.content }}</p>
 </section>
+
 <app-user-reply
   *ngIf="userReply"
   (onReply)="handleContent($event)"
   [replyItem]="replyCurUser"
-  [replyTo]="replyItem.replyingTo"
 ></app-user-reply>

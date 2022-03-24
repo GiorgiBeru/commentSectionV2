@@ -6,11 +6,14 @@
         alt="User Avatar"
       />
       <h1>{{ commentItem.user.username }}</h1>
-      <div  class="you" *ngIf="commentItem.user?.username === curUser.username">You</div>
+      <div class="you" *ngIf="commentItem.user?.username === curUser.username">
+        You
+      </div>
       <span>{{ commentItem.createdAt }}</span>
     </div>
+
     <div *ngIf="commentItem.user.username === curUser.username" class="arricon">
-      <div id="icon1Div" (click)="deleteComment(commentItem.id)">
+      <div id="icon1Div" (click)="toggleModal()">
         <svg
           width="12"
           height="14"
@@ -24,7 +27,7 @@
         </svg>
         Delete
       </div>
-      <div id="icon2Div">
+      <div id="icon2Div" (click)="toggleEdit()">
         <svg
           width="14"
           height="14"
@@ -59,11 +62,18 @@
       Reply
     </div>
   </div>
-  <p>{{ commentItem.content }}</p>
+  <p *ngIf="!isEditActive">{{ commentItem.content }}</p>
+
+  <div *ngIf="isEditActive" class="edit">
+    <textarea class="edit__textArea" [(ngModel)]="editContent">
+      {{ commentItem.content }}
+    </textarea>
+    <button class="edit__updateButton">Update</button>
+  </div>
 </section>
 
 <app-comment-reply
-  (bla)="handleMainReply($event)"
+  (contentEmmit)="handleMainReply($event)"
   (idEmittedGrandChild)="handleIdEmittedGrandChild($event)"
   *ngFor="let reply of commentItem.replies"
   [replyItem]="reply"
@@ -75,3 +85,9 @@
   [replyItem]="curUser"
   *ngIf="userReply"
 ></app-user-reply>
+
+<app-suretodelete
+  *ngIf="isModalActive"
+  (onYesDelete)="deleteComment(commentItem.id)"
+  (onNoDelete)="toggleModal()"
+></app-suretodelete>

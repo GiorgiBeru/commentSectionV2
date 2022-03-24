@@ -1,35 +1,35 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Commentari, CurrentUser, Data, Reply } from '../app.model';
 import { StorageService } from '../storage.service';
 import { UsersService } from '../users.service';
 const commentKey = 'comments';
-
+import { formatDistance } from 'date-fns';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss'],
 })
 export class CommentComponent implements OnInit {
-  ngOnInit(): void {
-    this.loadUsers();
-  }
-  refreshStorage() {
-    this.storageService.set<Data>(commentKey, {
-      currentUser: this.currentUser,
-      comments: this.comments,
-    });
-  }
   currentUser!: CurrentUser;
   comments!: Commentari[];
+  mainreply: string = '';
 
   constructor(
     private usersService: UsersService,
     private storageService: StorageService
   ) {}
 
-  mainreply: string = '';
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  refreshStorage() {
+    this.storageService.set<Data>(commentKey, {
+      currentUser: this.currentUser,
+      comments: this.comments,
+    });
+  }
+
   async loadUsers() {
     const storageData = this.storageService.get<Data>(commentKey);
     if (storageData) {
@@ -48,21 +48,22 @@ export class CommentComponent implements OnInit {
     const toReply = this.comments.find((item) => item.id == data.id);
     const newComment: Reply = {
       content: data.content,
-      createdAt: 'just now',
+      createdAt: formatDistance(Date.now(), new Date()),
       id: this.generateMaxId(),
       replyingTo: toReply?.user?.username ? toReply?.user?.username : '',
       score: 0,
       user: this.currentUser,
     };
+
     toReply?.replies.push(newComment);
     this.refreshStorage();
   }
-  HandleReplyToDelete(arr: Reply[]){
+  HandleReplyToDelete() {
     this.refreshStorage();
   }
+
   n: number = 0;
   HandleIdEmitted(id: number) {
-    console.log(this.comments);
     this.comments.map((item: Commentari, index) => {
       if (item.id === id) {
         return (this.n = index);
@@ -89,13 +90,15 @@ export class CommentComponent implements OnInit {
     if (this.mainreply) {
       const newComment: Commentari = {
         content: this.mainreply,
-        createdAt: new Date().getDate().toString(),
+        createdAt: formatDistance(Date.now(), new Date()),
         id: this.generateMaxId(),
         score: 0,
         user: this.currentUser,
         replies: [],
       };
+
       this.comments.push(newComment);
+
       this.mainreply = '';
       this.refreshStorage();
     }

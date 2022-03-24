@@ -9,6 +9,8 @@ import { CommentItemComponent } from './comment/comment-item/comment-item.compon
 import { CommentReplyComponent } from './comment/comment-item/comment-reply/comment-reply.component';
 import { UserReplyComponent } from './comment/comment-item/comment-reply/user-reply/user-reply.component';
 import { FormsModule } from '@angular/forms';
+import { CommentEditComponent } from './comment-edit/comment-edit.component';
+import { SuretodeleteComponent } from './suretodelete/suretodelete.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { FormsModule } from '@angular/forms';
     CommentItemComponent,
     CommentReplyComponent,
     UserReplyComponent,
+    CommentEditComponent,
+    SuretodeleteComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

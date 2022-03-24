@@ -2,10 +2,11 @@
   <app-comment-item
     (onMainReply)="HanldeMainReply($event)"
     (idEmitted)="HandleIdEmitted($event)"
-    (replyToDelete)="HandleReplyToDelete($event)"
+    (replyToDelete)="HandleReplyToDelete()"
     *ngFor="let comment of comments"
     [commentItem]="comment"
     [curUser]="currentUser"
+    
   ></app-comment-item>
 </section>
 

@@ -9,7 +9,7 @@ import { CurrentUser, Reply } from 'src/app/app.model';
 export class CommentReplyComponent implements OnInit {
   @Input() replyItem!: Reply;
   @Input() replyCurUser!: CurrentUser;
-  @Output() bla: EventEmitter<string> = new EventEmitter<string>();
+  @Output() contentEmmit: EventEmitter<string> = new EventEmitter<string>();
   @Output() idEmittedGrandChild: EventEmitter<any> = new EventEmitter<any>();
   constructor() {}
   userReply: Boolean = false;
@@ -20,8 +20,9 @@ export class CommentReplyComponent implements OnInit {
 
   handleContent(content: string) {
     this.userReplies();
-    this.bla.emit(content);
+    this.contentEmmit.emit(content);
   }
+  
   deleteCommentari: boolean = false;
   deleteComment(id: number){
     this.deleteCommentari = !this.deleteCommentari;

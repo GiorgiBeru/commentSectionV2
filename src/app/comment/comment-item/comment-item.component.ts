@@ -12,21 +12,36 @@ export class CommentItemComponent implements OnInit {
   @Output() onMainReply: EventEmitter<any> = new EventEmitter<any>();
   @Output() idEmitted: EventEmitter<any> = new EventEmitter<any>();
   @Output() replyToDelete: EventEmitter<any> = new EventEmitter<any>();
+  
   userReply: Boolean = false;
+  editContent = '';
+
+
+  constructor() {}
   userReplies() {
     this.userReply = !this.userReply;
   }
-  constructor() {}
 
+  
   handleMainReply(content: string) {
     this.onMainReply.emit({ content, id: this.commentItem.id });
     this.userReplies();
   }
+  
+ 
+
+  isEditActive = false;
+  toggleEdit() {
+    this.isEditActive = !this.isEditActive;
+  }
   deleteCommentari: boolean = false;
+
   deleteComment(id: number) {
     this.deleteCommentari = !this.deleteCommentari;
     this.idEmitted.emit(id);
+    this.toggleModal();
   }
+
   n: number = 0;
   handleIdEmittedGrandChild(id: number) {
     this.commentItem.replies.map((reply: Reply, index) => {
@@ -37,7 +52,12 @@ export class CommentItemComponent implements OnInit {
       }
     });
     this.commentItem.replies.splice(this.n, 1);
-    this.replyToDelete.emit(this.commentItem.replies);
+    this.replyToDelete.emit();
   }
+  isModalActive = false;
+  toggleModal() {
+    this.isModalActive = !this.isModalActive;
+  }
+
   ngOnInit(): void {}
 }
