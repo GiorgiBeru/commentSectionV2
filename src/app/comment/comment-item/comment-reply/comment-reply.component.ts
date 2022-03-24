@@ -28,4 +28,8 @@ export class CommentReplyComponent implements OnInit {
     this.deleteCommentari = !this.deleteCommentari;
     this.idEmittedGrandChild.emit(id);
   }
+  isModalActive = false;
+  toggleModal() {
+    this.isModalActive = !this.isModalActive;
+  }
 }

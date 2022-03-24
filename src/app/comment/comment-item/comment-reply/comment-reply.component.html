@@ -13,7 +13,7 @@
       *ngIf="replyItem.user?.username === replyCurUser.username"
       class="arricon"
     >
-      <div id="icon1Div" (click)="deleteComment(replyItem.id)">
+      <div id="icon1Div" (click)="toggleModal()">
         <svg
           width="12"
           height="14"
@@ -70,3 +70,8 @@
   (onReply)="handleContent($event)"
   [replyItem]="replyCurUser"
 ></app-user-reply>
+<app-suretodelete
+  *ngIf="isModalActive"
+  (onYesDelete)="deleteComment(replyItem.id)"
+  (onNoDelete)="toggleModal()"
+></app-suretodelete>
